@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ExercisesController < ApplicationController
+class ExercisesController < OpenReadController
   before_action :set_exercise, only: %i[show update destroy]
 
   # GET /exercises
@@ -17,7 +17,7 @@ class ExercisesController < ApplicationController
 
   # POST /exercises
   def create
-    @exercise = Exercise.new(exercise_params)
+    @exercise = current_user.exercises.build(exercise_params)
 
     if @exercise.save
       render json: @exercise, status: :created, location: @exercise
@@ -44,13 +44,14 @@ class ExercisesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_exercise
-    @exercise = Exercise.find(params[:id])
+    @exercise = current_user.exercises.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def exercise_params
     params.require(:exercise).permit(:title,
                                      :description,
-                                     :category)
+                                     :category,
+                                     :user_id)
   end
 end

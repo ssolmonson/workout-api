@@ -2,5 +2,6 @@ class Exercise < ApplicationRecord
   belongs_to :user
   validates :title,
             :description,
-            :category
+            :category,
+            presence: true
 end
