@@ -16,7 +16,9 @@ class ExercisesController < OpenReadController
   end
 
   def show_cat
-    render json: Exercise.where(category: params[:id])
+    render json: Exercise.where(category: params[:id]).shuffle.take(5)
+    # arr.shuffle
+    # arr.take(n) where n is the first amount of elements
   end
 
   # POST /exercises
