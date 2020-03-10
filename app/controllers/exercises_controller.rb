@@ -15,6 +15,10 @@ class ExercisesController < OpenReadController
     render json: @exercise
   end
 
+  def show_cat
+    render json: Exercise.where(category: params[:id])
+  end
+
   # POST /exercises
   def create
     @exercise = current_user.exercises.build(exercise_params)
@@ -45,6 +49,7 @@ class ExercisesController < OpenReadController
   # Use callbacks to share common setup or constraints between actions.
   def set_exercise
     @exercise = current_user.exercises.find(params[:id])
+    # @exercise = current_user.exercises.find(params[:category])
   end
 
   # Only allow a trusted parameter "white list" through.
