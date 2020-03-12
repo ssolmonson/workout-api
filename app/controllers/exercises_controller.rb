@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ExercisesController < OpenReadController
-  before_action :set_exercise, only: %i[show update destroy]
+  before_action :set_exercise, only: %i[update destroy]
 
   # GET /exercises
   def index
@@ -12,6 +12,7 @@ class ExercisesController < OpenReadController
 
   # GET /exercises/1
   def show
+    @exercise = Exercise.find(params[:id])
     render json: @exercise
   end
 
