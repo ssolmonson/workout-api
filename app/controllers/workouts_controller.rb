@@ -17,6 +17,9 @@ class WorkoutsController < ProtectedController
 
   # POST /workouts
   def create
+    # params
+    # { workout: { workout_date: "2020-01-01"}}
+
     @workout = current_user.workouts.build(workout_params)
 
     if @workout.save
