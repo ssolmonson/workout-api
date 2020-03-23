@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TrainingsController < ApplicationController
+class TrainingsController < ProtectedController
   before_action :set_training, only: %i[show update destroy]
 
   # GET /trainings
