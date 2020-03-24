@@ -17,7 +17,7 @@ class TrainingsController < ProtectedController
 
   # POST /trainings
   def create
-    @training = Training.new(training_params)
+    @training = current_user.trainings.build(training_params)
 
     if @training.save
       render json: @training, status: :created, location: @training
@@ -44,7 +44,7 @@ class TrainingsController < ProtectedController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_training
-    @training = Training.find(params[:id])
+    @training = current_user.trainings.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
